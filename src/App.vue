@@ -1,9 +1,9 @@
 <script lang="ts">
   import { defineComponent } from '@vue/composition-api'
-  import Title from './components/common/Title.vue'
-  import Form from './components/Form.vue'
-  import List from './components/List.vue'
-  import Detail from './components/Detail.vue'
+  import Title from './components/common/Title/index.vue'
+  import Form from './components/Form/index.vue'
+  import List from './components/List/index.vue'
+  import Detail from './components/Detail/index.vue'
 
   export default defineComponent({
       name: 'App',

@@ -1,0 +1,30 @@
+#wrapper {
+    @include wrapper();
+
+    table {
+        width: 100%;
+        table-layout:fixed;
+        .title, .info {
+            box-sizing: border-box;
+            @extend %three-dot;
+
+        }      
+        .title {
+            width: 30%;
+            font-size: 15px;
+            color: #0abde3;
+        }
+        .info {
+            width: 70%;
+            color: #1dd1a1;
+        }
+        .smallRow {
+            height: 50px;
+        }
+    }
+}
+
+ul {
+    padding: 0;
+    margin: 1em;
+}
