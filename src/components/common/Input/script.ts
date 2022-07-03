@@ -9,8 +9,13 @@ export default defineComponent({
         },
         placeholder: {
             type: String
+        },
+        modelValue: {
+            type: String,
+            required: true
         }
     },
+    emits: ['update:modelValue'],
     setup() {
         
     },

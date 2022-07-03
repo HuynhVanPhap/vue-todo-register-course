@@ -1,6 +1,8 @@
 <template>
     <div :id="$style.wrapper">
         <input
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
             :type="type"
             :placeholder="placeholder"
         >
@@ -9,7 +11,5 @@
     </div>
 </template>
 
-<script lang="ts" src="./script">
-</script>
-<style lang="scss" module src="./styles.scss">
-</style>
+<script lang="ts" src="./script"></script>
+<style lang="scss" module src="./styles.scss"></style>

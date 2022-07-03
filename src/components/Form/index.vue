@@ -2,10 +2,17 @@
     <div :id="$style.wrapper">
         <form>
             <div :class="$style.formInput">
-                <Input type="text" v-model="student.name" placeholder="Họ và tên"/>
+                <Input
+                    type="text"
+                    v-model="student.name"
+                    placeholder="Họ và tên"
+                />
             </div>
             <div :class="$style.formInput">
-                <Input type="date" v-model="student.birthday" />
+                <Input
+                    type="date"
+                    v-model="student.birthday"
+                />
             </div>
             <div :class="$style.formLabel">
                 <span>Giới tính</span>
@@ -65,7 +72,7 @@
                 </div>
             </div>
             <div :class="$style.formButton">
-                <Button label="Thêm mới" />
+                <Button label="Thêm mới" :onHandleSubmit="handleSubmit"/>
             </div>
         </form>
     </div>

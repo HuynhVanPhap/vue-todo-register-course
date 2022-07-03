@@ -9,6 +9,10 @@ export default defineComponent ({
         },
         label: {
             type: String
+        },
+        onHandleSubmit: {
+            type: Function,
+            required: false
         }
     }
 })

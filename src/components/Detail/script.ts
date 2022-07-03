@@ -1,17 +1,21 @@
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, onUpdated } from 'vue'
+import type { PropType } from 'vue'
+import Student from '../../types/Student'
 
 export default defineComponent({
     name: 'Detail',
-    setup() {
-        const student = reactive({
-            name: 'Nguyên Văn A',
-            birthday: '5/4/1998',
-            gender: 1,
-            class: 'A3/1',
-            subjects: [
-                'PHP',
-                'Vue'
-            ]
+    props: {
+        student: {
+            type: Object as PropType<Student>,
+            required: false
+        },
+    },
+    setup(props) {
+        const student = props.student;
+
+        onUpdated(() => {
+            console.log('Detail: Thông tin student');
+            console.log(student);
         });
 
         return {

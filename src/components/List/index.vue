@@ -1,7 +1,7 @@
 <template>
     <div :id="$style.wrapper">
         <div :id="$style.list">
-            <div :class="$style.item" v-for="(student, index) in students" :key="index">
+            <div :class="$style.item" v-for="(student, index) in students" :key="student.id">
                 <div :class="$style.gender">
                     <fa :icon="['fas', 'mars']" color="#74b9ff" v-if="student.gender" />
                     <fa :icon="['fas', 'venus']" color="#f8a5c2" v-if="!student.gender" />
@@ -14,6 +14,7 @@
                         type="primary"
                         circle
                         size="small"
+                        @click="onShowDetail(student.id)"
                     >
                         <fa :icon="['fas', 'eye']" />
                     </el-button>
@@ -21,6 +22,7 @@
                         type="danger" 
                         circle
                         size="small"
+                        @click="onDelete(index)"
                     >
                         <fa :icon="['fas', 'trash-can']" />
                     </el-button>

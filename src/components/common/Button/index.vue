@@ -1,7 +1,8 @@
 <template>
     <div :id="$style.wrapper">
         <button
-            type="submit"
+            type="button"
+            @click="onHandleSubmit"
         >
             <span>{{ label }}</span>
         </button>
