@@ -24,6 +24,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
       '@styles': path.resolve(__dirname, 'src/styles/'),
       '@common': path.resolve(__dirname, 'src/components/common/'),
+      '@types': path.resolve(__dirname, 'src/types/'),
     }
   },
 })
