@@ -1,22 +1,40 @@
 <script lang="ts">
-  import { defineComponent } from '@vue/composition-api'
-  import Title from './components/common/Title.vue'
-  import Form from './components/Form.vue'
-  import List from './components/List.vue'
-  import Detail from './components/Detail.vue'
+  import { defineComponent, reactive, toRefs } from 'vue'
+  import Student from './types/Student'
+  import * as data from './static/data'
+  import Title from './components/common/Title/index.vue'
+  import Form from './components/Form/index.vue'
+  import List from './components/List/index.vue'
+  import Detail from './components/Detail/index.vue'
+import { useStore } from './store'
 
-  export default defineComponent({
-      name: 'App',
-      components: {
-        Title,
-        Form,
-        List,
-        Detail
-      },
-      setup() {
-          
-      },
-  })
+export default defineComponent({
+    name: 'App',
+    components: {
+      Title,
+      Form,
+      List,
+      Detail
+    },
+    setup() {
+        const store = useStore();
+        const state: {
+          student: Student
+        } = reactive({
+          student: data.initStudent
+        });
+
+      const handleShowDetail = (id: number | undefined) => {
+        const student = store.getters.queryStudentById(id);
+        Object.assign(state.student, {...student});
+      }
+
+      return {
+        ...toRefs(state),
+        handleShowDetail
+      }
+    },
+})
 </script>
 
 <template>
@@ -34,7 +52,7 @@
         <Title content="Danh sách học sinh" />
       </div>
       <div :class="$style.container">
-          <List />
+          <List @on-show-detail="handleShowDetail" />
       </div>
     </div>
     <div :id="$style.detailWrapper">
@@ -42,7 +60,7 @@
         <Title content="Thông tin học sinh" />
       </div>
       <div :class="$style.container">
-          <Detail />
+          <Detail :student="student" />
       </div>
     </div>
   </div>

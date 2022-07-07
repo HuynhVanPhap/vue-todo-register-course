@@ -16,6 +16,7 @@
     "element-plus": "^2.2.5",
     "element-ui": "^2.15.9",
     "vue": "^3.2.25",
+    "vuex": "^4.0.2",
     "yarn": "^1.22.19"
   },
   "devDependencies": {

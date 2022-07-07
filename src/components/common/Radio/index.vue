@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'Radio',
@@ -24,8 +24,4 @@ export default defineComponent({
     </div>
 </template>
 
-<style lang="scss" module>
-#wrapper {
-    width: 100%;
-}
-</style>
+<style lang="scss" module src="./styles.scss"></style>
