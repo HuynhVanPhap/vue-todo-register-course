@@ -1,12 +1,15 @@
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, onMounted } from 'vue'
 import Input from '@common/Input/index.vue'
 import Radio from '@common/Radio/index.vue'
 import Button from '@common/Button/index.vue'
 import * as data from '../../static/data'
 import Student from '../../types/Student'
+import Course from '../../types/Course'
 import { useStore } from '../../store'
 import { StudentsMutationTypes } from '../../store/students/mutation-types'
+import { courseRepo } from '../../repository/course'
+import studentRepo from '../../repository/student'
 
 export default defineComponent({
     name: 'Form',
@@ -20,17 +23,26 @@ export default defineComponent({
         const store = useStore();
         const genders = data.genders;
         const classes = data.classes;
+        const courses = reactive<Course[]>([data.initCourses]);
         const student = reactive<Student>(data.initStudent); 
 
-        const handleSubmit = () => {
-            console.log(student);
-            store.commit(StudentsMutationTypes.STORE_DATA, {...student});
+        const handleSubmit = async () => {
+            await studentRepo.addNew({...student});
         }
+
+        onMounted(async () => {
+            const data = await courseRepo.getListCourses().then((res: any) => {
+                return res;
+            });
+
+            Object.assign(courses, {...data});
+        });
 
         return {
             genders,
             classes,
             student,
+            courses,
             handleSubmit
         }
     },
@@ -89,25 +101,16 @@ export default defineComponent({
             </div>
             <div :class="$style.formInput">
                 <div :class="$style.wrapCheckbox">
-                    <el-checkbox-group :class="$style.wrapCheckbox" v-model="student.courses">
+                    <el-checkbox-group :class="$style.wrapCheckbox" v-model="student.arrCourses">
                         <el-checkbox
-                            value="JavaScript"
-                            label="JavaScript"
+                            v-for="course in courses"
+                            :key="course.id"
+                            :label="course.id"
                             size="large"
                             border
-                        />
-                        <el-checkbox
-                            value="PHP"
-                            label="PHP"
-                            size="large"
-                            border
-                        />
-                        <el-checkbox
-                            value="ReactJS"
-                            label="ReactJS"
-                            size="large"
-                            border
-                        />
+                        >
+                            {{ course.name}}
+                        </el-checkbox>
                     </el-checkbox-group>
                 </div>
             </div>

@@ -1,0 +1,26 @@
+[] ISSUE_DON'T_SYNC_STUDENT_DATA {
+    [] WANT: {
+        [] Dữ liệu student ở detail không được đồng bộ với dữ liệu student form
+    },
+    [D] HAPPEN: {
+        - Khi nhập dữ liệu ở form thì detail cũng sẽ show dữ liệu vừa nhập [x]
+        - Khi nhấn show student ở detail thì student form tự động nhập [x]
+    },
+    [D] GUESS: {
+        - Cả detail và và form đều sử dụng chung một biến student reactive
+    }
+},
+
+[v] ISSUE_CANT_ADD_NEW {
+    [] WANT: {
+        [v] When I submit button after the form have fill data input, data will sent to server and it will be store in database
+    },
+    [D] HAPPEN: {
+        - When I press submit button, Server reponse 500 (Internal Server Error) message
+    },
+    [D] GUESS: {
+        - When student object sent, we have arrCourses: string[], the arrCourses: number[] should be [x]
+        - In server, property to be handled is arrCourses, not courses [v]
+    }
+}
+

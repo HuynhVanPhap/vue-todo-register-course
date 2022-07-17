@@ -1,7 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted, onBeforeUpdate } from 'vue'
 import type { PropType } from 'vue'
 import { useStore } from '../../store';
+import studentRepo from '../../repository/student';
 
 export default defineComponent({
     name: 'List',
@@ -16,9 +17,16 @@ export default defineComponent({
             emit('onShowDetail', id);
         }
 
-        function handleDelete(index: number) {
-            store.getters.queryRemoveStudentById(index);
+        async function handleDelete(id: number | undefined) {
+            await studentRepo.remove(id);
         }
+
+        onMounted(async () => {
+            const data = await studentRepo.getList().then((res: any) => {
+                return res;
+            });
+            Object.assign(students.value, {...data});
+        });
 
         return {
             students,
@@ -34,8 +42,8 @@ export default defineComponent({
         <div :id="$style.list">
             <div :class="$style.item" v-for="(student, index) in students" :key="index">
                 <div :class="$style.gender">
-                    <fa :icon="['fas', 'mars']" color="#74b9ff" v-if="student.gender" />
-                    <fa :icon="['fas', 'venus']" color="#f8a5c2" v-if="!student.gender" />
+                    <fa :icon="['fas', 'mars']" color="#74b9ff" v-if="student.gender === 1" />
+                    <fa :icon="['fas', 'venus']" color="#f8a5c2" v-if="student.gender === 0" />
                 </div>
                 <div :class="$style.name">
                     <span>{{ student.name }}</span>
@@ -53,7 +61,7 @@ export default defineComponent({
                         type="danger" 
                         circle
                         size="small"
-                        @click="handleDelete(index)"
+                        @click="handleDelete(student.id)"
                     >
                         <fa :icon="['fas', 'trash-can']" />
                     </el-button>

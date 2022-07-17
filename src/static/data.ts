@@ -1,10 +1,5 @@
 import Student from '../types/Student'
-
-export const courses = [
-    "PHP",
-    "JavaScript",
-    "ReactJS"
-];
+import Course from '../types/Course'
 
 export const classes = [
     {
@@ -32,5 +27,17 @@ export const initStudent: Student = {
     birthday: '',
     gender: '',
     class: '',
-    courses: []
+    courses: [
+        {
+            id: 0,
+            name: '',
+        }
+    ]
 };
+
+export const initCourses: Course = {
+    id: 0,
+    name: '',
+};
+
+export const initArrCourses: (string | number)[] = [''];

@@ -1,12 +1,13 @@
 <script lang="ts">
-  import { defineComponent, reactive, toRefs } from 'vue'
-  import Student from './types/Student'
-  import * as data from './static/data'
-  import Title from './components/common/Title/index.vue'
-  import Form from './components/Form/index.vue'
-  import List from './components/List/index.vue'
-  import Detail from './components/Detail/index.vue'
+import { defineComponent, reactive, toRefs, onMounted } from 'vue'
+import Student from './types/Student'
+import * as data from './static/data'
+import Title from './components/common/Title/index.vue'
+import Form from './components/Form/index.vue'
+import List from './components/List/index.vue'
+import Detail from './components/Detail/index.vue'
 import { useStore } from './store'
+import studentRepo from './repository/student'
 
 export default defineComponent({
     name: 'App',
@@ -24,9 +25,13 @@ export default defineComponent({
           student: data.initStudent
         });
 
-      const handleShowDetail = (id: number | undefined) => {
-        const student = store.getters.queryStudentById(id);
-        Object.assign(state.student, {...student});
+      const handleShowDetail = async (id: number | undefined) => {
+        // const student = store.getters.queryStudentById(id);
+        const data = await studentRepo.getById(id).then((res: any) => {
+          return res;
+        });
+
+        Object.assign(state.student, {...data});
       }
 
       return {

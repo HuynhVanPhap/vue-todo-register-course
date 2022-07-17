@@ -40,8 +40,8 @@ export default defineComponent({
             <tr :class="$style.smallRow">
                 <td :class="$style.title">Giới tính</td>
                 <td :class="$style.info">
-                    <fa :icon="['fas', 'mars']" color="#74b9ff" v-if="student?.gender" />
-                    <fa :icon="['fas', 'venus']" color="#f8a5c2" v-if="!student?.gender" />
+                    <fa :icon="['fas', 'mars']" color="#74b9ff" v-if="student?.gender === 1" />
+                    <fa :icon="['fas', 'venus']" color="#f8a5c2" v-if="student?.gender === 0" />
                 </td>
             </tr>
             <tr :class="$style.smallRow">
@@ -52,7 +52,7 @@ export default defineComponent({
                 <td :class="$style.title">Môn học</td>
                 <td :class="$style.info">
                     <ul>
-                        <li v-for="(subject, index) in student?.courses" :key="index">{{ subject }}</li>
+                        <li v-for="course in student?.courses" :key="course.id">{{ course.name }}</li>
                     </ul>
                 </td>
             </tr>

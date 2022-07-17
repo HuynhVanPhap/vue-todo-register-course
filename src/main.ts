@@ -5,6 +5,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ElementPlus from 'element-plus';
 import { store } from './store'
+import { axiosConfig } from './repository/axios-config'
 import App from './App.vue'
 
 const app = createApp(App);
@@ -13,6 +14,6 @@ library.add(fas, fab);
 app
 .use(ElementPlus)
 .use(store)
+// .use(axiosConfig)
 .component('fa', FontAwesomeIcon)
 .mount('#app');
-
